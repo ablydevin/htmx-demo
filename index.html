@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+    <script src="https://cdn.ably.com/lib/ably.min-1.js"></script>
+    <script src="./ably.js"></script>
+  </head>
+  <body>
+    <div hx-ext="ably" 
+      ably-connect
+      ably-key="[YOUR_API_KEY]"
+      ably-clientId="devin">
+
+      <div ably-subscribe="message-outbound">
+        <div id="notifications" hx-swap-oob="beforeend">          
+        </div>
+        <div id="chat_room" hx-swap-oob="morphdom"></div>
+
+        <form id="form" ably-publish="message-inbound">
+            <input name="chat_message">
+        </form>
+      </div>
+
+      <div ably-subscribe="different-channel">
+        <div id="more" hx-swap-oob="beforeend"></div>
+      <div>
+    </div>
+
+    <script>
+      document.body.addEventListener('htmx:ablyConnecting', function(evt) {
+        console.log(evt);
+      });
+      document.body.addEventListener('htmx:ablyConnected', function(evt) {
+        console.log(evt);
+      });
+      document.body.addEventListener('htmx:ablyDisconnected', function(evt) {
+        console.log(evt);
+      });
+      document.body.addEventListener('htmx:ablyFailed', function(evt) {
+        console.log(evt);
+      });
+      document.body.addEventListener('htmx:ablyBeforeMessage', function(evt) {
+        console.log(evt);
+      });
+      document.body.addEventListener('htmx:ablyAfterMessage', function(evt) {
+        console.log(evt);
+      });  
+      document.body.addEventListener('htmx:ablyBeforeSend', function(evt) {
+        console.log(evt);
+      });
+      document.body.addEventListener('htmx:ablyAfterSend', function(evt) {
+        console.log(evt);
+      });  
+      document.body.addEventListener('htmx:ablyBeforeChannelSubscribe', function(evt) {
+        console.log(evt);
+      });  
+      document.body.addEventListener('htmx:ablyAfterChannelSubscribe', function(evt) {
+        console.log(evt);
+      });  
+    </script>
+  <body>
+</html>
